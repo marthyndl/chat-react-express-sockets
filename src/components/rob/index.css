@@ -1,0 +1,60 @@
+html, body{
+    height: 100%;
+    background-color: rgb(241, 241, 241);
+  }
+  
+  .contenedor{
+    height: 49%;
+    background-color: #ffffff;
+    margin: 1% 1%;
+    
+  }
+
+  .messages {
+    height: 49%;
+    background-color: #ffffff;
+    margin: 1% 1%;
+    text-align: center;
+  }
+
+  .title {
+    padding-top: 1%;
+    margin: 1% 1%;
+    text-align: center;
+    margin: 1% 1%;
+  }
+
+  .boxes {
+    height: 40%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .lauraBox{
+    height: 100%;
+    width: 50%;
+    background-color: rgb(86, 80, 167);
+    margin: 1% 1%;
+    text-align: center;
+  }
+  .robBox{
+    height: 100%;
+    width: 100%;
+    background-color: rgb(86, 80, 167);
+    margin: 1% 1%;
+    text-align: center;
+  }
+  .italic {
+    font-style: italic;
+    color: pink;
+  }
+  
+  .oblique {
+    font-style: oblique;
+    color: blue;
+  }
+
+  .time {
+    font-style: normal;
+    color: gray;
+  }
