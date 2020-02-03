@@ -19,16 +19,17 @@ app.set('port', process.env.POR || 3000)
 app.use(morgan('dev'))
 app.use(express.static(__dirname + '/public'))
 
-app.use(webpackDevMiddleware(webpack(webpackConfig)));
+app.use(webpackDevMiddleware(webpack(webpackConfig), {writeToDisk: true, publicPath: '/' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 io.on('connection', socket => {
-  socket.on('message', body => {
+  socket.on('message', message => {
+    console.log('message server *****', message)
     socket.broadcast.emit('message', {
-      body: body,
-      from: socket.id.slice(8),
-      time: Moment(Date()).format('MMMM Do YYYY, h:mm:ss a')
-    })
+        body: message.body,
+        from: message.from,
+        time: message.time
+      })
   })
 })
 

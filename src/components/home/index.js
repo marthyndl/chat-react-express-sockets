@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component, useEffect, useState} from 'react';
 import { withRouter } from "react-router-dom";
 import io from 'socket.io-client';
 import Moment from 'moment';
 import './index.scss';
 
-class Home extends React.Component {
+class Home extends Component {
 
   constructor(props) {
     super(props);
@@ -15,9 +15,9 @@ class Home extends React.Component {
   }
 
   componentDidMount () {
-    this.socket = io('/')
+    this.socket = io('http://localhost:3000', {transports: ['websocket'], upgrade: false});
     this.socket.on('message', message => {
-      console.log('message', message)
+      console.log('message post server ****', message)
       this.setState({ messages: [message, ...this.state.messages]})
     })
   }
@@ -42,8 +42,12 @@ class Home extends React.Component {
         from: (bool === true) ? 'Laura' : 'Rob',
         time
       }
-      this.setState({ messages: [message, ...this.state.messages]})
-      this.socket.emit('message', body)
+      this.setState({ messages: [message, ...this.state.messages]}, () => {
+        this.socket.emit('message', message)
+        console.log('message pre server ****', this.state.messages)
+      })
+      
+      
       event.target.value = ''
       if (event.target.value === null || event.target.value === undefined || event.target.value === '') {
         this.setState({ writeMessage: '' })
